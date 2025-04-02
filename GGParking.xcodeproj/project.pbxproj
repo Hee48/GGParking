@@ -6,13 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		393ED7062D9D0FC1002C925E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393ED7052D9D0FC1002C925E /* Model.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		393ED6ED2D9D0FB5002C925E /* GGParking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GGParking.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		393ED7052D9D0FC1002C925E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -50,7 +45,6 @@
 		393ED6E42D9D0FB5002C925E = {
 			isa = PBXGroup;
 			children = (
-				393ED7052D9D0FC1002C925E /* Model.swift */,
 				393ED6EF2D9D0FB5002C925E /* GGParking */,
 				393ED6EE2D9D0FB5002C925E /* Products */,
 			);
@@ -138,7 +132,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				393ED7062D9D0FC1002C925E /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
