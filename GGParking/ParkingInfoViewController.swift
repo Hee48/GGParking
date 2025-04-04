@@ -18,6 +18,7 @@ class ParkingInfoViewController: UIViewController {
     @IBOutlet weak var lblPark_CHRG_Info: UILabel!
     @IBOutlet weak var lblPark_CHRG_Add: UILabel!
     @IBOutlet weak var lblParkDisa: UILabel!
+    @IBOutlet weak var moveMapView: UIButton!
     
     var park : [String:String]?
     
@@ -25,7 +26,7 @@ class ParkingInfoViewController: UIViewController {
         super.viewDidLoad()
         
         guard let park else { return }
-        
+        setupButton()
         lblParkNM.text = park["PARKPLC_NM"]
         lblPark_DIV_NM.text = park["PARKPLC_DIV_NM"]
         lblParkAD.text = (park["LOCPLC_LOTNO_ADDR"] ?? park["LOCPLC_ROADNM_ADDR"])
@@ -41,6 +42,23 @@ class ParkingInfoViewController: UIViewController {
             lblPark_CHRG_Add.text = ""
         }
         lblParkDisa.text = "장애인 주차구역 보유 여부 : " + (park["TMP01"] ?? "N")
+    }
+    func setupButton() {
+        moveMapView.layer.cornerRadius = 20
+        moveMapView.layer.borderWidth = 0.5
+        moveMapView.layer.borderColor = UIColor.black.cgColor
+    }
+    @IBAction func moveMapViewButton(_ sender: Any) {
+        guard let mapViewVC = self.storyboard?.instantiateViewController(withIdentifier: "mapView") as? LookMapViewController else { return }
+        mapViewVC.modalPresentationStyle = .fullScreen
+        if let latString = park?["REFINE_WGS84_LAT"], let lat = Double(latString),
+           let lonString = park?["REFINE_WGS84_LOGT"], let lon = Double(lonString),
+           let parkName = park?["PARKPLC_NM"] {
+            mapViewVC.latitude = lat
+            mapViewVC.longitude = lon
+            mapViewVC.parkingName = parkName
+        }
+        self.present(mapViewVC, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

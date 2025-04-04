@@ -203,6 +203,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="지도보기">
                                     <color key="baseForegroundColor" systemColor="labelColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="moveMapViewButton:" destination="GGk-oF-hBV" eventType="touchUpInside" id="qeU-IL-gd8"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="creditcard.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="X3b-zh-Zxc">
                                 <rect key="frame" x="25" y="290" width="25" height="25"/>
@@ -224,11 +227,55 @@
                         <outlet property="lblPark_CHRG_Add" destination="s0T-Zq-caH" id="VPZ-xH-hqq"/>
                         <outlet property="lblPark_CHRG_Info" destination="BKB-hh-Qmt" id="rHm-ul-IJ9"/>
                         <outlet property="lblPark_DIV_NM" destination="jXV-Ud-PQa" id="zlZ-g3-fo4"/>
+                        <outlet property="moveMapView" destination="yJU-HS-Brw" id="cSA-C7-JRJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PeK-h0-4y4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4585.0746268656712" y="-2.7459954233409607"/>
+        </scene>
+        <!--Look Map View Controller-->
+        <scene sceneID="CQy-SJ-0Fb">
+            <objects>
+                <viewController storyboardIdentifier="mapView" id="CNL-fb-zCV" customClass="LookMapViewController" customModule="GGParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AxP-rj-bMm">
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Yh-49-Uck">
+                                <rect key="frame" x="0.0" y="129" width="402" height="745"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAb-jM-xoL">
+                                <rect key="frame" x="16" y="77" width="370" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J74-7C-ipa">
+                                <rect key="frame" x="326" y="72" width="60" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="moveMainVC:" destination="CNL-fb-zCV" eventType="touchUpInside" id="3qn-Lh-qG7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zec-q5-C5U"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="7Yh-49-Uck" id="FPK-rm-uB1"/>
+                        <outlet property="parkingNameLabel" destination="fAb-jM-xoL" id="B4M-gY-a5c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ZZ-wh-8cT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5347.7611940298502" y="-3.432494279176201"/>
         </scene>
         <!--내 주변 주차장-->
         <scene sceneID="Ias-ZH-WEv">
@@ -288,6 +335,7 @@
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="maps-and-flags" width="512" height="512"/>
         <image name="parkingsign.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
