@@ -16,7 +16,6 @@ import CoreLocation
 class ViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var searchMoveButton: UIButton!
     @IBOutlet weak var mainLabel: UILabel!
     
@@ -25,7 +24,7 @@ class ViewController: UIViewController {
     var key:String?
     var userLocation: CLLocation?// 현재 위치 저장
     let locationManager = CLLocationManager()
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMapView()
@@ -153,16 +152,3 @@ extension ViewController: MKMapViewDelegate {
     }
 }
 
-class CustomAnnotation: NSObject, MKAnnotation {
-    
-    var coordinate: CLLocationCoordinate2D
-    var title: String?
-    var icon: String
-    
-    init(coordinate: CLLocationCoordinate2D, title: String? = nil, icon: String) {
-        self.coordinate = coordinate
-        self.title = title
-        self.icon = icon
-    }
-    
-}
