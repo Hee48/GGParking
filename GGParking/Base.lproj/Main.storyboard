@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="'시, 군'으로 검색해 주세요." id="1lM-QE-RkQ">
+                        <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="동으로 검색해 주세요" id="1lM-QE-RkQ">
                             <rect key="frame" x="0.0" y="0.0" width="402" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
