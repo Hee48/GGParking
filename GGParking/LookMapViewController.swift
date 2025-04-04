@@ -22,9 +22,17 @@ class LookMapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        parkingNameLabel.text = parkingName
         infoMapLocation()
+        setupNameText()
         mapView.delegate = self
+        
+    }
+    func setupNameText() {
+        if let name = parkingName {
+            parkingNameLabel.text = name.contains("주차장") ? name : "\(name) 주차장"
+        } else {
+            parkingNameLabel.text = "이름 없음"
+        }
     }
     @IBAction func moveMainVC(_ sender: Any) {
         dismiss(animated: true)
