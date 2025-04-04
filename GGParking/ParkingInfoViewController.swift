@@ -27,7 +27,11 @@ class ParkingInfoViewController: UIViewController {
         
         guard let park else { return }
         setupButton()
-        lblParkNM.text = park["PARKPLC_NM"]
+        if let parkName = park["PARKPLC_NM"] {
+            lblParkNM?.text = parkName.contains("주차장") ? parkName : "\(parkName) 주차장"
+                } else {
+                    lblParkNM?.text = ""
+                }
         lblPark_DIV_NM.text = park["PARKPLC_DIV_NM"]
         lblParkAD.text = (park["LOCPLC_LOTNO_ADDR"] ?? park["LOCPLC_ROADNM_ADDR"])
         lblParkTimeW.text = "평일: " + (park["WKDAY_OPERT_BEGIN_TM"] ?? "") + " - " + (park["WKDAY_OPERT_END_TM"] ?? "")
