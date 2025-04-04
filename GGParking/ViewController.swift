@@ -45,7 +45,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: CLLocationManagerDelegate {
-    
+    //위도 경도를 시로바꾸는거
     func geocoderRoadAddress() {
         guard let userLoc = userLocation else { return }
         let geocoder = CLGeocoder()
@@ -66,6 +66,7 @@ extension ViewController: CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         mapView.setUserTrackingMode(.follow, animated: true)
         mapView.showsUserLocation = true
+        mapView.delegate = self
     }
     //현재 위치를 핀으로 띄우는것
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -73,31 +74,25 @@ extension ViewController: CLLocationManagerDelegate {
         self.userLocation = latestLocation
         let location = CLLocationCoordinate2D(latitude: latestLocation.coordinate.latitude, longitude: latestLocation.coordinate.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let pin = MKPointAnnotation()
         let region = MKCoordinateRegion(center: location, span: span)
-        pin.coordinate = location
-        pin.title = "내위치"
         mapView.setRegion(region, animated: true)
-        mapView.addAnnotation(pin)
         geocoderRoadAddress()
-        
     }
     //현재 위치 주변의 핀을 띄우는것 > for문으로 작업
     func surroundParkingPins() {
         let parkingData = parsingData()
         for parkPin in parkingData {
-            let pin = MKPointAnnotation()
-            pin.coordinate = CLLocationCoordinate2D(latitude: parkPin.latitude, longitude: parkPin.longitude)
-            pin.title = parkPin.name
+            let pin = CustomAnnotation(coordinate: CLLocationCoordinate2D(latitude: parkPin.latitude, longitude: parkPin.longitude), title: parkPin.name, icon: "maps-and-flags")
             mapView.addAnnotation(pin)
         }
         
     }
+    //파싱된 데이터를 튜플로바꿔서 빈어레이로 꺼내쓰는 함수
     func parsingData() -> [(name: String, latitude: Double, longitude: Double)] {
         var parsingArray: [(name: String, latitude:Double, longitude: Double)] = []
         
         for place in parkingPlaces {
-            if let name = place["SIGUN_NM"],
+            if let name = place["PARKPLC_NM"],
                let latString = place["REFINE_WGS84_LAT"],
                let lonString = place["REFINE_WGS84_LOGT"],
                let latitude = Double(latString),
@@ -108,6 +103,7 @@ extension ViewController: CLLocationManagerDelegate {
         return parsingArray
     }
 }
+//XML파싱
 extension ViewController: XMLParserDelegate {
     
     func parserDidStartDocument(_ parser: XMLParser) {
@@ -140,4 +136,33 @@ extension ViewController: XMLParserDelegate {
         print("End")
         surroundParkingPins()
     }
+}
+//커스텀핀만드는 부분
+extension ViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? CustomAnnotation else { return nil }
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "maps-and-flags")
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "maps-and-flags")
+            annotationView?.canShowCallout = true
+            annotationView?.image = UIImage(named: annotation.icon)
+            annotationView?.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        }
+        annotationView?.annotation = annotation
+        return annotationView
+    }
+}
+
+class CustomAnnotation: NSObject, MKAnnotation {
+    
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var icon: String
+    
+    init(coordinate: CLLocationCoordinate2D, title: String? = nil, icon: String) {
+        self.coordinate = coordinate
+        self.title = title
+        self.icon = icon
+    }
+    
 }
