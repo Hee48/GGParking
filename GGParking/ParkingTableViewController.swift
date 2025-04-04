@@ -57,9 +57,19 @@ class ParkingTableViewController: UITableViewController {
         
         lblParkNM?.text = (park["PARKPLC_NM"] ?? "")
         lblParkRAD?.text = park["CHRG_INFO"]
-        lblParkLAD?.text = park["LOCPLC_LOTNO_ADDR"]
+        lblParkLAD?.text = (park["LOCPLC_LOTNO_ADDR"] ?? park["LOCPLC_ROADNM_ADDR"])
 
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "search" {
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                  let targetVC = segue.destination as? ParkingInfoViewController,
+                  let park = parkingPlaces[indexPath.row] as? [String:String] else { return }
+            
+            targetVC.park = park
+        }
     }
 }
 
