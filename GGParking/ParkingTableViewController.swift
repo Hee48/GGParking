@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ParkingTableViewController: UITableViewController {
+class ParkingTableViewController: UITableViewController, OptionDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
 
     let apiKey = "6d0c002a5823469c88df2b45cde53488"
@@ -16,6 +16,7 @@ class ParkingTableViewController: UITableViewController {
     var key: String?
     var currentPark: [String: String] = [:]
     var searchKeyword: String?
+    var isFreeOnly: Bool = false
     
     // 경기도 시군 리스트
     let sigunList = [
@@ -31,7 +32,14 @@ class ParkingTableViewController: UITableViewController {
         self.navigationController?.navigationBar.tintColor = .black
     }
 
-    // "동" 이름으로 전체 시군 검색 후 필터
+
+    
+    func didChangeFreeOption(isFreeOnly: Bool) {
+        if let keyword = searchKeyword {
+            searchParkingByDong(keyword: keyword)
+        }
+    }
+
     func searchParkingByDong(keyword: String) {
         parkingPlaces.removeAll()
         searchKeyword = keyword
@@ -96,6 +104,10 @@ class ParkingTableViewController: UITableViewController {
 
             let park = parkingPlaces[indexPath.row]
             targetVC.park = park
+        } else if segue.identifier == "option" {
+            if let optionVC = segue.destination as? OptionViewController {
+                optionVC.delegate = self
+            }
         }
     }
 }
@@ -126,11 +138,22 @@ extension ParkingTableViewController: XMLParserDelegate {
                 let address1 = currentPark["LOCPLC_ROADNM_ADDR"] ?? ""
                 let address2 = currentPark["LOCPLC_LOTNO_ADDR"] ?? ""
                 if address1.contains(keyword) || address2.contains(keyword) {
-                    self.parkingPlaces.append(self.currentPark)
+                    let isFreeOnly = UserDefaults.standard.bool(forKey: "isFreeOnly") //옵션 상태 확인
+                    let chrgInfo = currentPark["CHRG_INFO"] ?? ""
+
+                    // 무료 주차장만 보기 옵션이 켜져 있을 때는 "무료" 문자열을 포함하는 경우만 추가
+                    if isFreeOnly {
+                        if chrgInfo.contains("무료") {
+                            parkingPlaces.append(currentPark)
+                        }
+                    } else {
+                        parkingPlaces.append(currentPark)
+                    }
                 }
             }
         }
     }
+
 
     func parserDidEndDocument(_ parser: XMLParser) {
         DispatchQueue.main.async {
