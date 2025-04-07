@@ -41,6 +41,9 @@ class ViewController: UIViewController {
             parser.parse()
         }.resume()
     }
+    @IBAction func moveMyLocation(_ sender: Any) {
+        mapView.setUserTrackingMode(.follow, animated: true)
+    }
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -72,20 +75,29 @@ extension ViewController: CLLocationManagerDelegate {
         guard let latestLocation = locations.last else { return }
         self.userLocation = latestLocation
         let location = CLLocationCoordinate2D(latitude: latestLocation.coordinate.latitude, longitude: latestLocation.coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
         locationManager.stopUpdatingLocation()
         geocoderRoadAddress()
     }
     //현재 위치 주변의 핀을 띄우는것 > for문으로 작업
-    func surroundParkingPins() {
+    func surroundParkingPins(radius: Double = 5000) {
+        guard let userLocation = userLocation else { return }
         let parkingData = parsingData()
-        for parkPin in parkingData {
-            let pin = CustomAnnotation(coordinate: CLLocationCoordinate2D(latitude: parkPin.latitude, longitude: parkPin.longitude), title: parkPin.name, icon: "maps-and-flags")
-            mapView.addAnnotation(pin)
+        for park in parkingData {
+            let parkLocation = CLLocation(latitude: park.latitude, longitude: park.longitude)
+            let distance = userLocation.distance(from: parkLocation)
+            
+            if distance <= radius {
+                let pin = CustomAnnotation(
+                    coordinate: CLLocationCoordinate2D(latitude: park.latitude, longitude: park.longitude),
+                    title: park.name,
+                    icon: "maps-and-flags"
+                )
+                mapView.addAnnotation(pin)
+            }
         }
-        
     }
 }
 //XML파싱
@@ -114,12 +126,12 @@ extension ViewController: XMLParserDelegate {
     }
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "row" {
-            print(parkingPlaces)
+//            print(parkingPlaces)
         }
     }
     func parserDidEndDocument(_ parser: XMLParser) {
         print("End")
-        surroundParkingPins()
+        surroundParkingPins(radius: 5000)
     }
     
     //파싱된 데이터를 튜플로바꿔서 빈어레이로 꺼내쓰는 함수
