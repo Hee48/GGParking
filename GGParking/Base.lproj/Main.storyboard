@@ -74,7 +74,13 @@
                             <outlet property="delegate" destination="4KJ-zv-6hc" id="mc6-Jq-ZJx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="주차장 검색" style="editor" id="9A1-nf-9hw"/>
+                    <navigationItem key="navigationItem" title="주차장 검색" style="editor" id="9A1-nf-9hw">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="gearshape" catalog="system" id="pON-lU-MWx">
+                            <connections>
+                                <segue destination="hG0-BY-bAG" kind="show" identifier="option" id="bPR-1k-tCP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="1lM-QE-RkQ" id="N0h-0b-4eV"/>
                     </connections>
@@ -230,7 +236,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PeK-h0-4y4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4585.0746268656712" y="-2.7459954233409607"/>
+            <point key="canvasLocation" x="4587" y="447"/>
+        </scene>
+        <!--검색 옵션-->
+        <scene sceneID="Qvn-bz-2oT">
+            <objects>
+                <viewController id="hG0-BY-bAG" customClass="OptionViewController" customModule="GGParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BKH-lr-S7p">
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GMh-vP-Mgn">
+                                <rect key="frame" x="311" y="144" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" red="0.5314910646201999" green="0.79225541305060343" blue="0.35489133571889697" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="switchOption:" destination="hG0-BY-bAG" eventType="valueChanged" id="U21-NH-1tw"/>
+                                </connections>
+                            </switch>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rrH-9m-2lJ">
+                                <rect key="frame" x="0.0" y="199" width="402" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="무료만 보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJh-hh-hOj">
+                                <rect key="frame" x="32" y="144" width="142" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="NOk-zk-GWU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="검색 옵션" id="LeZ-CZ-7EY"/>
+                    <connections>
+                        <outlet property="lblSearch" destination="VJh-hh-hOj" id="0J2-sZ-p3f"/>
+                        <outlet property="switchSearch" destination="GMh-vP-Mgn" id="1eA-Ec-xI0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hoK-kd-P6e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4600" y="-257.43707093821507"/>
         </scene>
         <!--Look Map View Controller-->
         <scene sceneID="CQy-SJ-0Fb">
@@ -330,8 +378,9 @@
     <resources>
         <image name="clock.fill" catalog="system" width="128" height="123"/>
         <image name="creditcard.fill" catalog="system" width="128" height="88"/>
+        <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
-        <image name="map" width="50" height="50"/>
+        <image name="map" width="40" height="40"/>
         <image name="maps-and-flags" width="512" height="512"/>
         <image name="parkingsign.circle.fill" catalog="system" width="128" height="123"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
@@ -340,6 +389,9 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
