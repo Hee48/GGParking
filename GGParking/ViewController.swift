@@ -41,6 +41,9 @@ class ViewController: UIViewController {
             parser.parse()
         }.resume()
     }
+    @IBAction func moveMyLocation(_ sender: Any) {
+        mapView.setUserTrackingMode(.follow, animated: true)
+    }
 }
 
 extension ViewController: CLLocationManagerDelegate {
@@ -72,7 +75,7 @@ extension ViewController: CLLocationManagerDelegate {
         guard let latestLocation = locations.last else { return }
         self.userLocation = latestLocation
         let location = CLLocationCoordinate2D(latitude: latestLocation.coordinate.latitude, longitude: latestLocation.coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
         locationManager.stopUpdatingLocation()
@@ -114,7 +117,7 @@ extension ViewController: XMLParserDelegate {
     }
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "row" {
-            print(parkingPlaces)
+//            print(parkingPlaces)
         }
     }
     func parserDidEndDocument(_ parser: XMLParser) {

@@ -19,18 +19,19 @@ class ParkingTableViewController: UITableViewController {
     
     // 경기도 시군 리스트
     let sigunList = [
-        "수원시", "성남시", "용인시", "부천시", "화성시", "안산시", "안양시", "평택시",
+        "고양시", "수원시", "성남시", "용인시", "부천시", "화성시", "안산시", "안양시", "평택시",
         "의정부시", "시흥시", "파주시", "김포시", "광주시", "광명시", "군포시", "하남시",
         "오산시", "이천시", "안성시", "구리시", "의왕시", "양평군", "여주시", "동두천시",
-        "과천시", "가평군", "연천군", "남양주시", "양주시", "포천시", "고양시"
+        "과천시", "가평군", "연천군", "남양주시", "양주시", "포천시"
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+        self.navigationController?.navigationBar.tintColor = .black
     }
 
-    // ✅ "동" 이름으로 전체 시군 검색 후 필터
+    // "동" 이름으로 전체 시군 검색 후 필터
     func searchParkingByDong(keyword: String) {
         parkingPlaces.removeAll()
         searchKeyword = keyword
