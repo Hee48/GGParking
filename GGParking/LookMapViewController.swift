@@ -53,12 +53,12 @@ extension LookMapViewController: MKMapViewDelegate {
     //커스텀어노테이션부분
     func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? CustomAnnotation else { return nil }
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "placeholder")
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "pin")
         if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "placeholder")
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
             annotationView?.canShowCallout = true
             annotationView?.image = UIImage(named: annotation.icon)
-            annotationView?.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+            annotationView?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         }
         annotationView?.annotation = annotation
         return annotationView

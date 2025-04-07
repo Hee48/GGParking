@@ -197,12 +197,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJU-HS-Brw">
-                                <rect key="frame" x="303" y="86" width="83" height="35"/>
+                                <rect key="frame" x="308" y="72" width="74" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="지도보기">
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                </buttonConfiguration>
+                                <buttonConfiguration key="configuration" style="plain" image="map"/>
                                 <connections>
                                     <action selector="moveMapViewButton:" destination="GGk-oF-hBV" eventType="touchUpInside" id="qeU-IL-gd8"/>
                                 </connections>
@@ -333,12 +331,10 @@
         <image name="clock.fill" catalog="system" width="128" height="123"/>
         <image name="creditcard.fill" catalog="system" width="128" height="88"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="map" width="50" height="50"/>
         <image name="maps-and-flags" width="512" height="512"/>
         <image name="parkingsign.circle.fill" catalog="system" width="128" height="123"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

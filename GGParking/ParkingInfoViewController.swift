@@ -49,7 +49,7 @@ class ParkingInfoViewController: UIViewController {
     }
     func setupButton() {
         moveMapView.layer.cornerRadius = 20
-        moveMapView.layer.borderWidth = 0.5
+        moveMapView.layer.borderWidth = 1
         moveMapView.layer.borderColor = UIColor.black.cgColor
     }
     @IBAction func moveMapViewButton(_ sender: Any) {
