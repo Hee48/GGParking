@@ -67,7 +67,7 @@ extension ViewController: CLLocationManagerDelegate {
         mapView.showsUserLocation = true
         mapView.delegate = self
     }
-    //현재 위치를 핀으로 띄우는것
+    //현재 위치를 받는것
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latestLocation = locations.last else { return }
         self.userLocation = latestLocation
@@ -75,6 +75,7 @@ extension ViewController: CLLocationManagerDelegate {
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
+        locationManager.stopUpdatingLocation()
         geocoderRoadAddress()
     }
     //현재 위치 주변의 핀을 띄우는것 > for문으로 작업
@@ -85,21 +86,6 @@ extension ViewController: CLLocationManagerDelegate {
             mapView.addAnnotation(pin)
         }
         
-    }
-    //파싱된 데이터를 튜플로바꿔서 빈어레이로 꺼내쓰는 함수
-    func parsingData() -> [(name: String, latitude: Double, longitude: Double)] {
-        var parsingArray: [(name: String, latitude:Double, longitude: Double)] = []
-        
-        for place in parkingPlaces {
-            if let name = place["PARKPLC_NM"],
-               let latString = place["REFINE_WGS84_LAT"],
-               let lonString = place["REFINE_WGS84_LOGT"],
-               let latitude = Double(latString),
-               let longtiude = Double(lonString) {
-                parsingArray.append((name, latitude, longtiude))
-            }
-        }
-        return parsingArray
     }
 }
 //XML파싱
@@ -128,21 +114,37 @@ extension ViewController: XMLParserDelegate {
     }
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "row" {
-            //print(parkingPlaces)
+            print(parkingPlaces)
         }
     }
     func parserDidEndDocument(_ parser: XMLParser) {
         print("End")
         surroundParkingPins()
     }
+    
+    //파싱된 데이터를 튜플로바꿔서 빈어레이로 꺼내쓰는 함수
+    func parsingData() -> [(name: String, latitude: Double, longitude: Double)] {
+        var parsingArray: [(name: String, latitude:Double, longitude: Double)] = []
+        
+        for place in parkingPlaces {
+            if let name = place["PARKPLC_NM"],
+               let latString = place["REFINE_WGS84_LAT"],
+               let lonString = place["REFINE_WGS84_LOGT"],
+               let latitude = Double(latString),
+               let longtiude = Double(lonString) {
+                parsingArray.append((name, latitude, longtiude))
+            }
+        }
+        return parsingArray
+    }
 }
 //커스텀핀만드는 부분
 extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? CustomAnnotation else { return nil }
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "maps-and-flags")
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "pin")
         if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "maps-and-flags")
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
             annotationView?.canShowCallout = true
             annotationView?.image = UIImage(named: annotation.icon)
             annotationView?.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
