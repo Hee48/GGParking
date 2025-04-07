@@ -341,6 +341,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="내 주변 주차장" id="VOj-5F-wLn">
+                        <barButtonItem key="leftBarButtonItem" image="gps" id="VDz-t2-GrR">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="moveMyLocation:" destination="7p5-GS-7gQ" id="m7D-Ss-xyP"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="hSl-se-45j">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -378,7 +384,11 @@
     <resources>
         <image name="clock.fill" catalog="system" width="128" height="123"/>
         <image name="creditcard.fill" catalog="system" width="128" height="88"/>
+
+        <image name="gps" width="30" height="30"/>
+
         <image name="gearshape" catalog="system" width="128" height="123"/>
+
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="map" width="40" height="40"/>
         <image name="maps-and-flags" width="512" height="512"/>

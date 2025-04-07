@@ -31,6 +31,8 @@ class ParkingTableViewController: UITableViewController, OptionDelegate {
         searchBar.delegate = self
         self.navigationController?.navigationBar.tintColor = .black
     }
+
+
     
     func didChangeFreeOption(isFreeOnly: Bool) {
         if let keyword = searchKeyword {
@@ -38,7 +40,6 @@ class ParkingTableViewController: UITableViewController, OptionDelegate {
         }
     }
 
-    //"동" 이름으로 전체 시군 검색 후 필터
     func searchParkingByDong(keyword: String) {
         parkingPlaces.removeAll()
         searchKeyword = keyword

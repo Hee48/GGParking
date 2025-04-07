@@ -25,7 +25,6 @@ class LookMapViewController: UIViewController {
         infoMapLocation()
         setupNameText()
         mapView.delegate = self
-        
     }
     func setupNameText() {
         if let name = parkingName {
