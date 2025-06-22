@@ -4,6 +4,7 @@
 
 GG파킹(GG Parking)은 경기도 지역 주차장 정보를 확인할 수 있도록 돕는 모바일 애플리케이션
 <br/>
+<br/>
 Period : 25.04.02 ~ 25.04.07
 <br/>
 
@@ -22,10 +23,14 @@ Period : 25.04.02 ~ 25.04.07
 ###Stacks
 
 Language
-#F05138
+<img src="https://img.shields.io/badge/swift-%23FA7343.svg?&style=for-the-badge&logo=swift&logoColor=white" />
+<br/>
+<br/>
 
 Communication
-#181717 #F24E1E
+<img src="https://img.shields.io/badge/github-%23181717.svg?&style=for-the-badge&logo=github&logoColor=white" />
+<img src="https://img.shields.io/badge/figma-%23F24E1E.svg?&style=for-the-badge&logo=figma&logoColor=white" />
+
 
 <br/>
 
