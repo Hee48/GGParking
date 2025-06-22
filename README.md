@@ -20,14 +20,16 @@ Period : 25.04.02 ~ 25.04.07
 
 <br/>
 
-###Stacks
+### Stacks
 
 Language
+<br/>
 <img src="https://img.shields.io/badge/swift-%23FA7343.svg?&style=for-the-badge&logo=swift&logoColor=white" />
 <br/>
 <br/>
 
 Communication
+<br/>
 <img src="https://img.shields.io/badge/github-%23181717.svg?&style=for-the-badge&logo=github&logoColor=white" />
 <img src="https://img.shields.io/badge/figma-%23F24E1E.svg?&style=for-the-badge&logo=figma&logoColor=white" />
 
