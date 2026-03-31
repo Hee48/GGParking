@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchMoveButton: UIButton!
     @IBOutlet weak var mainLabel: UILabel!
     
-    let apiKey = "6d0c002a5823469c88df2b45cde53488"
+    let apiKey = ""
     var parkingPlaces: [[String:String]] = []
     var key:String?
     var userLocation: CLLocation?// 현재 위치 저장
